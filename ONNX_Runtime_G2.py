@@ -1,3 +1,5 @@
+#Reference:https://zhuanlan.zhihu.com/p/479290520
+#Pytorch 版本: 实现修改分辨率的功能
 import torch 
 from torch import nn 
 from torch.nn.functional import interpolate 
@@ -52,7 +54,7 @@ input_img = np.transpose(input_img, [2, 0, 1])
 input_img = np.expand_dims(input_img, 0) 
  
 # Inference 
-torch_output = model(torch.from_numpy(input_img), torch.tensor(4)).detach().numpy() 
+torch_output = model(torch.from_numpy(input_img), torch.tensor(6)).detach().numpy() 
  
 # NCHW to HWC 
 torch_output = np.squeeze(torch_output, 0) 

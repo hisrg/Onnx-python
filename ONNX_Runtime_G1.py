@@ -1,3 +1,5 @@
+#Refrence https://zhuanlan.zhihu.com/p/477743341
+#Refrence https://blog.csdn.net/weixin_36670529/article/details/107247170
 import os 
  
 import cv2 
@@ -13,8 +15,8 @@ class SuperResolutionNet(nn.Module):
         self.upscale_factor = upscale_factor 
         self.img_upsampler = nn.Upsample( 
             scale_factor=self.upscale_factor, 
-            mode='bicubic', 
-            align_corners=False) 
+            mode='bicubic', #双三次插值算法
+            align_corners=False) #https://blog.csdn.net/weixin_36670529/article/details/107247170
  
         self.conv1 = nn.Conv2d(3,64,kernel_size=9,padding=4) 
         self.conv2 = nn.Conv2d(64,32,kernel_size=1,padding=0) 
@@ -94,7 +96,7 @@ else:
 # test onnx model
 import onnxruntime 
  
-ort_session = onnxruntime.InferenceSession("srcnn.onnx",providers=['TensorrtExecutionProvider']) 
+ort_session = onnxruntime.InferenceSession("srcnn.onnx",providers=['CPUExecutionProvider']) #notice
 ort_inputs = {'input': input_img} 
 ort_output = ort_session.run(['output'], ort_inputs)[0] 
  

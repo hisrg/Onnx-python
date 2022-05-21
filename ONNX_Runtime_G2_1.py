@@ -1,4 +1,5 @@
 #reference https://zhuanlan.zhihu.com/p/479290520
+#Onnx 版本实现自定义分辨率功能
 from turtle import forward
 import torch
 from torch import nn
@@ -88,7 +89,7 @@ with torch.no_grad():
 #test
 import onnxruntime 
  
-input_factor = np.array([1, 1, 4, 4], dtype=np.float32) 
+input_factor = np.array([1, 1, 8, 8], dtype=np.float32) 
 ort_session = onnxruntime.InferenceSession("srcnn3.onnx",providers=['TensorrtExecutionProvider']) 
 ort_inputs = {'input': input_img, 'factor': input_factor} 
 ort_output = ort_session.run(None, ort_inputs)[0] 
